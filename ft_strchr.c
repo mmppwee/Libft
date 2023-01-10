@@ -20,11 +20,9 @@ char	*ft_strchr(const char *s, int c)
 	while (s[i] && s[i] != (char)c)
 		i++;
 	if (s[i] == (char)c)
-		return ((char*)&s[i]);
+		return ((char *)&s[i]);
 	return (NULL);
 }
-
-
 // #include <stdio.h>
 // #include <string.h>
 
@@ -36,6 +34,6 @@ char	*ft_strchr(const char *s, int c)
 //    ret = ft_strchr(str, ch);
 
 //    printf("|%s|\n", ret);
-   
+
 //    return(0);
-// }	
+// }

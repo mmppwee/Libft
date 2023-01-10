@@ -1,66 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pwareepo <pwareepo@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/10 18:11:04 by pwareepo          #+#    #+#             */
+/*   Updated: 2023/01/10 18:14:48 by pwareepo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int ft_count(int n)
+int	ft_count(int n)
 {
-    int i;
-    i = 1;
-    if (n < 0)
-    {
-        n = -n;
-        i = 2;
-    }
-    while (n >= 10)
-    {
-        n = n/10;
-        i++;
-    }
-    return (i);
+	int	i;
+
+	i = 1;
+	if (n < 0)
+	{
+		n = -n;
+		i = 2;
+	}
+	while (n >= 10)
+	{
+		n = n / 10;
+		i++;
+	}
+	return (i);
 }
 
-void ft_neg(char *str, int *n, int *sign)
+void	ft_neg(char *str, int *n, int *sign)
 {
-    str[0] = '-';
-    *n *= -1;
-    *sign = 1;
+	str[0] = '-';
+	*n *= -1;
+	*sign = 1;
 }
 
-static char *overflowwel()
+static char	*overflowwel(void)
 {
-    char *str;
-    str = malloc(sizeof(char) * 12);
-    if (!str)
-        return (NULL);
-    ft_memcpy(str, "-2147483648", 12);
-    return (str);
+	char	*str;
+
+	str = malloc(sizeof(char) * 12);
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, "-2147483648", 12);
+	return (str);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-    char    *str;
-    int     sign;
-    int     i;
-    int     j;
+	char	*str;
+	int		sign;
+	int		i;
+	int		j;
 
-    if (n == -2147483648)
-    {
-        str = overflowwel();
-        return (str); 
-    }
-    i = ft_count(n);
-    j = i;
-    str = malloc(i + 1);
-    if (str == NULL)
-        return (NULL);
-    sign = 0;
-    if (n < 0)
-        ft_neg(str, &n, &sign);
-    while (i > sign)
-    {
-        str[--i] = (n % 10) + '0';
-        n = n / 10;
-    }
-    str[j] = '\0';
-    return(str);
+	if (n == -2147483648)
+	{
+		str = overflowwel();
+		return (str);
+	}
+	i = ft_count(n);
+	j = i;
+	str = malloc(i + 1);
+	if (str == NULL)
+		return (NULL);
+	sign = 0;
+	if (n < 0)
+		ft_neg(str, &n, &sign);
+	while (i > sign)
+	{
+		str[--i] = (n % 10) + '0';
+		n = n / 10;
+	}
+	str[j] = '\0';
+	return (str);
 }
 
 // int main(void)
